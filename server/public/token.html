@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Express HTML</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div>
+    <div class="jumbotron"  style="padding:40px;">
+      <div style="text-align: center;margin-bottom: 25px;">
+      <h2>DIP Blockchain API(s)</h1>
+     </div>
+     <div>
+      <p>Your Access Token:</p>
+      <p></p>
+    </div>
+    </div>
+  </div>
+</body>
+<script>
+const query = window.location.search.substring(1)
+const token = query.split('access_token=')[1]
+document.getElementsByTagName("p")[1].innerHTML =token;
+</script>
+</html>

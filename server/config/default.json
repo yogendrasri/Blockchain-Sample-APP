@@ -1,0 +1,13 @@
+{
+  "logLevel": "debug",
+  "host": "localhost",
+  "port": "3000",
+  "timeout":20000,
+  "fsWalletPath":"./wallet",
+  "tokenSecret":"DXCDIPBlockchain",
+  "tokenExpriryTime":3600,
+  "ClientID": "6320e012-f376-4e61-b873-baa63fa07bb1-bluemix",
+  "ClientSecret": "xnb8VukmyJk2VMLmO8C1EjsuANmDdf8mmU3YxIt8lhsZ",
+  "CLOUDANT_URL":"https://6320e012-f376-4e61-b873-baa63fa07bb1-bluemix.cloudantnosqldb.appdomain.cloud"
+}
+

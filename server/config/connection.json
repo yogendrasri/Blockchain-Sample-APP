@@ -1,0 +1,39 @@
+{
+    "name": "org1mspprofile",
+    "description": "Network on IBP v2",
+    "version": "1.0.0",
+    "client": {
+        "organization": "org1msp"
+    },
+    "organizations": {
+        "org1msp": {
+            "mspid": "org1msp",
+            "certificateAuthorities": [
+                "ibpv2-org1ca-ca.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443"
+            ],
+            "peers": [
+                "ibpv2-peerorg1-peer.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443"
+            ]
+        }
+    },
+    "peers": {
+        "ibpv2-peerorg1-peer.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443": {
+            "url": "grpcs://ibpv2-peerorg1-peer.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIIB/TCCAaSgAwIBAgIULywukd1drCRS0wbTYqX+5wi1kckwCgYIKoZIzj0EAwIw\nXTELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMQ4wDAYDVQQDEwV0bHNjYTAe\nFw0yMDA1MjgwNzI1MDBaFw0zNTA1MjUwNzI1MDBaMF0xCzAJBgNVBAYTAlVTMRcw\nFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlwZXJsZWRnZXIxDzAN\nBgNVBAsTBkZhYnJpYzEOMAwGA1UEAxMFdGxzY2EwWTATBgcqhkjOPQIBBggqhkjO\nPQMBBwNCAATay///5C39LPknsgxIdywmVf8k+sr4FmW4kVFDFAuiDDazVI9478Pm\nBT7rjKkNQvRhd6F09J5Jh/GrVZZDEkGEo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYD\nVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUu9V+l/OQD/mIzcP1AL+zLFBWdU8wCgYI\nKoZIzj0EAwIDRwAwRAIgXb0GRZFxYsVKJ+HWK4VImDsP+yRh4kn39DqPX1cgfMwC\nIHOh6OpRJrmBE741E2XlaMl+cMjTEqNUwI3cat6ptmSB\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "ibpv2-peerorg1-peer.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ibpv2-org1ca-ca.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443": {
+            "url": "https://ibpv2-org1ca-ca.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443",
+            "caName": "ca",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIIDtjCCA1ygAwIBAgIQbzbuvC+9SfWaDEV3NwXV9zAKBggqhkjOPQQDAjCB2DEL\nMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMQ8wDQYDVQQHEwZE\ndXJoYW0xDDAKBgNVBAoTA0lCTTETMBEGA1UECxMKQmxvY2tjaGFpbjF8MHoGA1UE\nAxNzaWJwdjItb3JnMWNhLWNhLmJsb2NrY2hhaW4tb2NwMzExLWNsdXN0ZXItN2Vj\nNWQ3MjJhMGFiM2Y0NjNmZGM5MGVlYjk0ZGJjNzAtMDAwMS51cy1zb3V0aC5jb250\nYWluZXJzLmFwcGRvbWFpbi5jbG91ZDAeFw0yMDA1MjgwNzMwMjVaFw0zMDA1MjYw\nNzMwMjVaMIHYMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmEx\nDzANBgNVBAcTBkR1cmhhbTEMMAoGA1UEChMDSUJNMRMwEQYDVQQLEwpCbG9ja2No\nYWluMXwwegYDVQQDE3NpYnB2Mi1vcmcxY2EtY2EuYmxvY2tjaGFpbi1vY3AzMTEt\nY2x1c3Rlci03ZWM1ZDcyMmEwYWIzZjQ2M2ZkYzkwZWViOTRkYmM3MC0wMDAxLnVz\nLXNvdXRoLmNvbnRhaW5lcnMuYXBwZG9tYWluLmNsb3VkMFkwEwYHKoZIzj0CAQYI\nKoZIzj0DAQcDQgAEkNyTt9F06Ip5Y5Ua9xvQa3CEry6rOnLZzrHTih1hMdSF786b\nN933QwTC9djpEN7RZ7QlUmCQe+GUE+efKEtXF6OCAQQwggEAMIH9BgNVHREEgfUw\ngfKCc2licHYyLW9yZzFjYS1jYS5ibG9ja2NoYWluLW9jcDMxMS1jbHVzdGVyLTdl\nYzVkNzIyYTBhYjNmNDYzZmRjOTBlZWI5NGRiYzcwLTAwMDEudXMtc291dGguY29u\ndGFpbmVycy5hcHBkb21haW4uY2xvdWSCe2licHYyLW9yZzFjYS1vcGVyYXRpb25z\nLmJsb2NrY2hhaW4tb2NwMzExLWNsdXN0ZXItN2VjNWQ3MjJhMGFiM2Y0NjNmZGM5\nMGVlYjk0ZGJjNzAtMDAwMS51cy1zb3V0aC5jb250YWluZXJzLmFwcGRvbWFpbi5j\nbG91ZDAKBggqhkjOPQQDAgNIADBFAiEAx1nlwnJ4H35yLMyo1ccyzdxoVO40zKkV\ns2TvI05ABZMCIHJRIKX8Up5bnSydbvYSjvEi6RsebViFQTozINBPND99\n-----END CERTIFICATE-----\n"
+            }
+        }
+    }
+}
