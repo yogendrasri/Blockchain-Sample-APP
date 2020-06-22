@@ -4,11 +4,10 @@
   "port": "3000",
   "timeout":20000,
   "fsWalletPath":"./wallet",  
-  "ClientID": "6320e012-f376-4e61-b873-baa63fa07bb1-bluemix",
-  "ClientSecret": "nqVE6JuNuU4PwQo49tMYuY--F3QadwvRVL9PZMWngTgx",
-  "CLOUDANT_URL":"https://6320e012-f376-4e61-b873-baa63fa07bb1-bluemix.cloudantnosqldb.appdomain.cloud"
+  "ClientID": "2f6738e0-c897-4666-955a-912ac52bfb70-bluemix",
+  "ClientSecret": "xjQRt81auCFwFfJw0XeU0pHaYUKEjvMrU64mS1xX7mUf",
+  "CLOUDANT_URL":"https://2f6738e0-c897-4666-955a-912ac52bfb70-bluemix.cloudantnosqldb.appdomain.cloud"
 }
-
 
 
 

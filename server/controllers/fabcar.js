@@ -17,7 +17,7 @@
 const log4js = require('log4js');
 const config = require('config');
 const path = require('path');
-let connectionProfilePath =path.join(__dirname,'/../config/Connection.json');
+let connectionProfilePath =path.join(__dirname,'/../config/org1msp_profile.json');
 const util = require('../helpers/util');
 const logger = log4js.getLogger('controllers - Fabcar');
 const fabricClientHelper =  require('../helpers/fabric-network-client');

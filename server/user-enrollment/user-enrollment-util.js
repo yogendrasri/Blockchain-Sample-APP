@@ -36,7 +36,7 @@ logger.setLevel(config.logLevel);
  * Initialize userEnrollmentutil with path of connection profile
  */
 
-let connectionProfilePath =path.join(__dirname,'/../config/Connection.json');
+let connectionProfilePath =path.join(__dirname,'/../config/org1msp_profile.json');
 
 /**
  * Enroll given user with given org Fabric CA
