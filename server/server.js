@@ -25,16 +25,15 @@ const config = require('config');
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const IBMCloudEnv = require('ibm-cloud-env');
-const errorHandler = require('../server/middlewares/error-handler');
+const errorHandler = require('../server/errorhandlers/error-handler');
 IBMCloudEnv.init();
 const routes = require('./routes');
 const walletHelper = require('./helpers/wallet');
 const cloudantDbHelper=require('./helpers/cloudant-db-helper');
-const node_env = process.env.NODE_ENV || 'development';
-
 const app = express();
 app.use(express.static(__dirname + '/public'))
 app.use(cors());
+
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -55,21 +54,6 @@ logger.debug('setting up app: registering routes, middleware...');
 
 const swaggerDocument = yaml.safeLoad(fs.readFileSync(path.join(__dirname, '../public', 'open-api.yaml'), 'utf8'));
 
-
-//block  un secure connection
-
-if (node_env === 'production') {
-
-	app.use(function (req, res, next) {
-		if (!req.secure) {
-			res.status(401).send('request is unauthorized');
-		} else {
-			next();
-		}
-	});
-	app.enable('trust proxy');
-}
-
 /**
  * Support json parsing
  */
@@ -83,12 +67,10 @@ app.use(bodyParser.json({
 
 logger.debug('setting up app: registering routes, middleware...');
 
-/** 
- * middleware for authentication
- */
 
-app.use(cookieParser());
-app.enable("trust proxy");
+
+//app.use(cookieParser());
+//app.enable("trust proxy");
 //app.use(express.static('public'))
 /**
  * GET home page
@@ -112,7 +94,7 @@ app.use('/api', routes);
 /**
  * Error handler
  */
-app.use(errorHandler.catchNotFound);
+
 app.use(errorHandler.handleError);
 
 /**
@@ -124,6 +106,7 @@ const port = process.env.PORT || config.port;
 //initialize wallet
 cloudantDbHelper.init();
 walletHelper.init();
+
 app.listen(port, () => {
 	logger.info(`app listening on http://${host}:${port}`);
 	logger.info(`Swagger UI is available at http://${host}:${port}/api-docs`);

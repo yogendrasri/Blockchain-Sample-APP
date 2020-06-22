@@ -2,8 +2,8 @@
 applications:
 - instances: 1
   timeout: 180
-  name: sample-blockchainservice
+  name: robotcalling-api
   buildpack: sdk-for-nodejs
   command: npm start
   memory: 512M  
-  host: sample-blockchainservice
+  host: robotcalling-api

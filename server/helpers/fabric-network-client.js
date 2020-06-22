@@ -52,16 +52,11 @@ fabricNetworkClient.submitTransaction = async (user, channelName, chaincodeName,
     const contract = network.getContract(chaincodeName);
 
     // invoke transaction
-    const transaction = contract.createTransaction(functionName);
+    const transaction = contract.createTransaction(functionName);    
+    logger.debug("parameters"+JSON.stringify(parameters));    
     await transaction.submit(JSON.stringify(parameters));
-     result = transaction.getTransactionID().getTransactionID();
-    if(result)
-    var transaction_res = await cloudantDbHelper.insertTransaction(
-      user,
-      parameters.proof['agreementHash'],
-      result
-    );
-    
+    result = transaction.getTransactionID().getTransactionID();
+
     return result;
   } catch (err) {
     throw new Error(err);
@@ -89,18 +84,12 @@ fabricNetworkClient.evaluateTransaction = async (user, channelName, chaincodeNam
     });
     const network = await gateway.getNetwork(channelName);
     const contract = network.getContract(chaincodeName);
-    const queryResponse = await contract.evaluateTransaction(functionName, parameter); 
-    if(queryResponse)
-    {
-     await cloudantDbHelper.getTransactionId(parameter).then((data)=>{ 
-     response = JSON.parse(queryResponse.toString());
-     response.transactionId = data.transactionId;
-     response.transactiontime = data.transactiontime;
-    }).catch ((err)=>{
-      throw new Error(err);
-    });
-    }
-    return response;
+    const queryResponse = await contract.evaluateTransaction(functionName);
+    //if parameter
+    //const queryResponse = await contract.evaluateTransaction(functionName,parameter); 
+    logger.debug("queryResponse"+queryResponse);
+    
+    return queryResponse;
   } catch (err) {
     throw new Error(err);
   } finally {

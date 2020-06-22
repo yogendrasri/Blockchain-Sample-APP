@@ -34,7 +34,7 @@ logger.setLevel(config.logLevel);
  */
 const user = {};
 
-user.createUser = async (req, res) => {
+user.createOrganization = async (req, res) => {
     logger.info('inside createUser()...');
     let jsonRes;
     try {
@@ -63,11 +63,32 @@ user.createUser = async (req, res) => {
 
 
 
-user.getUsers = async (req, res) => {
+user.getOrganizations = async (req, res) => {
     logger.info('inside getUsers()...');
     let jsonRes;
     try {
         const result= await cloudantDbHelper.getAllUsers();      
+        jsonRes = {
+            statusCode: 200,
+            success: true,
+            result: result
+        };
+    } catch (err) {
+        jsonRes = {
+            statusCode: 500,
+            success: false,
+            message: `FAILED: ${err}`,
+        };
+    }
+
+    util.sendResponse(res, jsonRes);
+};
+
+user.getOrganization = async (req, res) => {
+    logger.info('inside getUser()...');
+    let jsonRes;
+    try {
+        const result= await cloudantDbHelper.getUser(req.params['userId']);      
         jsonRes = {
             statusCode: 200,
             success: true,

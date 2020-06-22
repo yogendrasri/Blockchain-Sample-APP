@@ -36,8 +36,8 @@ logger.setLevel(config.logLevel);
  * Initialize userEnrollmentutil with path of connection profile
  */
 
-   let connectionProfilePath =path.join(__dirname,'/../config/org1msp_profile.json');
-// let connectionProfilePath =path.join(__dirname,'/../config/local_fabric_connection.json');
+let connectionProfilePath =path.join(__dirname,'/../config/Connection.json');
+
 /**
  * Enroll given user with given org Fabric CA
  */
@@ -60,7 +60,7 @@ userEnrollmentutil.userEnroll = (orgName, enrollId, enrollSecret) => {
     
     const fabricCAKey = orgs[orgName].certificateAuthorities[0];    
     //const fabricCAEndpoint = cas[fabricCAKey].url; 
-    const fabricCAEndpoint = "https://ibpv2-org1ca-ca.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443";   
+    const fabricCAEndpoint = "https://n4ebf76-org1ca.blockchaincluster-514144-2608f7c7397b2edb107073058f244789-0000.us-south.containers.appdomain.cloud:7054";    
     //const fabricCAName = cas[fabricCAKey].caName;    
     const fabricCAName = "ca"; 
     // enroll user with certificate authority for orgName
@@ -136,14 +136,14 @@ userEnrollmentutil.userRegister = (orgName, enrollId, enrollSecret, affiliation,
     const fabricCAKey = orgs[orgName].certificateAuthorities[0];
     logger.debug("fabricCAKey"+fabricCAKey);
     //const fabricCAEndpoint = cas[fabricCAKey].url;
-    const fabricCAEndpoint = "https://ibpv2-org1ca-ca.blockchain-ocp311-cluster-7ec5d722a0ab3f463fdc90eeb94dbc70-0001.us-south.containers.appdomain.cloud:443";
+    const fabricCAEndpoint = "https://n4ebf76-org1ca.blockchaincluster-514144-2608f7c7397b2edb107073058f244789-0000.us-south.containers.appdomain.cloud:7054";
     logger.debug("fabricCAEndpoint"+fabricCAEndpoint);
     const fabricCAName = "ca";
     //const fabricCAName = cas[fabricCAKey].caName;
     //const registrarId = cas[fabricCAKey].registrar[0].enrollId;
     //const registrarSecret = cas[fabricCAKey].registrar[0].enrollSecret;
-    const registrarId = "app-admin1";
-    const registrarSecret = "app-admin1pw";
+    const registrarId = "admin";
+    const registrarSecret = "adminpw";
     var fabricClient = new FabricClient();
     fabricClient.loadFromConfig(connectionProfilePath);
     FabricClient.newDefaultKeyValueStore({ path: walletPath

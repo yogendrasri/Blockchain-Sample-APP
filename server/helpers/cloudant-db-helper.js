@@ -18,8 +18,12 @@ var cloudant;
 var dbname;
 
 cloudantDBHelper.init = () => {
-  cloudant = Cloudant({ url: config.CLOUDANT_URL });  
-  dbname = cloudant.db.use("blockchain-db");  
+  //cloudant = Cloudant({ url: config.CLOUDANT_URL });  
+  //var cloudant = new Cloudant({ url: 'https://6320e012-f376-4e61-b873-baa63fa07bb1-bluemix.cloudantnosqldb.appdomain.cloud', plugins: { iamauth: { iamApiKey: 'nqVE6JuNuU4PwQo49tMYuY--F3QadwvRVL9PZMWngTgx' } } });  
+  var cloudant = new Cloudant({ url: 'https://2f6738e0-c897-4666-955a-912ac52bfb70-bluemix.cloudantnosqldb.appdomain.cloud', plugins: { iamauth: { iamApiKey: 'xjQRt81auCFwFfJw0XeU0pHaYUKEjvMrU64mS1xX7mUf' } } });
+  //dbname = cloudant.db.use("blockchainclient-api"); 
+  dbname = cloudant.db.use("robocallingwalletdb"); 
+   
 };
 
 cloudantDBHelper.getUser = async(userId) => {

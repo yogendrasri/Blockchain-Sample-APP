@@ -18,14 +18,8 @@ const express = require('express');
 const log4js = require('log4js');
 const config = require('config');
 
-const errorHandler = require('../middlewares/error-handler');
-const authHandler = require('../middlewares/authentication-handler');
-
-const accessToken = require('./access-token');
 const user=require('./user');
-const authority = require('./authority');
-const proof = require('./proof');
-const authorize = require('./authorize');
+const fabcar = require('./fabcar');
 const router = express.Router();
 
 
@@ -38,17 +32,10 @@ logger.setLevel(config.logLevel);
 /**
  * Add routes
  */
-router.use('/authorize', authorize);
-router.use('/user',user);
-router.use('/access-token',accessToken);
-router.use(authHandler.authenticateUser);
-router.use('/publishproof', proof);
-router.use('/findproof/', proof);
-router.use('/authority', authority);
 
-
-
-
-
+router.use('/createOrganization',user);
+router.use('/getOrganization',user);
+router.use('/queryAllCars', fabcar);
+router.use('/createCar', fabcar);
 
 module.exports = router;

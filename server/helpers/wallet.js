@@ -64,6 +64,7 @@ wallet.getWallet = () => {
  * @param {string} id - label of id in wallet
  */
 wallet.identityExists = async (id) => {
+  logger.debug("checking " + id + "");
   let existsInPersistant,identity_res;
   let existsInMemory = await memoryWallet.exists(id);
   if (!existsInMemory) {

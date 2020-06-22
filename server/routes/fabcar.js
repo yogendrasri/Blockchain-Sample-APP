@@ -18,22 +18,21 @@ const express = require('express');
 const log4js = require('log4js');
 const config = require('config');
 
-const accessTokenCtrl = require('../controllers/access-token');
+const fabcarCtrl = require('../controllers/fabcar');
 
 const router = express.Router();
 
 /**
  * Set up logging
  */
-const logger = log4js.getLogger('routes - accessToken');
+const logger = log4js.getLogger('routes - fabcar');
 logger.setLevel(config.logLevel);
 
-logger.debug('setting up /accessToken route');
-
+logger.debug('setting up /fabcar route');
 
 /**
  * Add routes
  */
-router.post('/', accessTokenCtrl.generateAccessToken);
-
+router.get('/:userId', fabcarCtrl.queryAllCars);
+router.post('/:userId', fabcarCtrl.createCar);
 module.exports = router;

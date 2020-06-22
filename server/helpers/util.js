@@ -42,6 +42,7 @@ util.sendResponse = (res, msg) => {
   res.statusCode = response.statusCode;
   delete response.statusCode;
   res.json(response);
+  
 };
 
  util.getSalt =()=>{

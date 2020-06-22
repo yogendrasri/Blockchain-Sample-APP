@@ -1,7 +1,7 @@
 {
-    "name": "fabcar",
+    "name": "robotcalling-api",
     "version": "1.0.0",
-    "description": "FabCar application implemented in JavaScript",
+    "description": "robotcalling-api application implemented in JavaScript",
     "engines": {
         "node": "10.16.3",
         "npm": "6.9.0"

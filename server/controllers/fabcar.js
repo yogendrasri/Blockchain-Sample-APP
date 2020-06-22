@@ -17,52 +17,44 @@
 const log4js = require('log4js');
 const config = require('config');
 const path = require('path');
-let connectionProfilePath =path.join(__dirname,'/../config/authority1channel_profile.json');
+let connectionProfilePath =path.join(__dirname,'/../config/Connection.json');
 const util = require('../helpers/util');
-const logger = log4js.getLogger('controllers - proof');
+const logger = log4js.getLogger('controllers - Fabcar');
 const fabricClientHelper =  require('../helpers/fabric-network-client');
 logger.setLevel(config.logLevel);     
 
 /**
  * Controller object
  */
-const proof = {};
+const fabcar = {};
 
-proof.getProofDetails = async (req, res) => {
+fabcar.queryAllCars = async (req, res) => {
  
   let jsonRes;
   try{
-  logger.debug('inside  getProofDetails()...');
-   await fabricClientHelper.evaluateTransaction(req.params['userId'],"authoritychannel","authoritycontract",connectionProfilePath,"getproofDetails",req.params['agreementHash'])
+  logger.debug('inside  queryAllCars()...'+ req.params['userId']);   
+   await fabricClientHelper.evaluateTransaction(req.params['userId'],"channel1","fabcar",connectionProfilePath,"queryAllCars","")
    .then((data)=>{
-     
-    jsonRes = {
-      statusCode: 200,
-      success: true,
-      result: data
-    };
+     logger.debug("data -"+data);
+     jsonRes = data;    
    }).catch(console.error());
-} catch(err) {
-  jsonRes = {
-    statusCode: 500,
-    success: false,
-    message: `FAILED: ${err}`,
-  } 
-  
+  } catch(err) {
+    jsonRes= `FAILED: ${err}`;  
  }
- console.log(jsonRes);
-  util.sendResponse(res, jsonRes);
+ console.log(jsonRes); 
+ res.send(JSON.parse(jsonRes)); 
 };
 
-proof.doPublishProof = async (req, res) => {
+fabcar.createCar = async (req, res) => {
   let response;
   try{
-    await fabricClientHelper.submitTransaction(req.body['userId'],"authoritychannel","authoritycontract",connectionProfilePath,"publishProof",req.body)
+    logger.debug('inside  createCar()...');
+    await fabricClientHelper.submitTransaction(req.params['userId'],"channel1","fabcar",connectionProfilePath,"createCar",req.body)
     .then((data)=>{
       response = {
         statusCode: 200,
         success: true,
-        message: 'Proof Published Sucessfully!',
+        message: 'Car Creared Sucessfully!',
         transactionId:data,
         status: 'UP',
       };
@@ -76,4 +68,4 @@ proof.doPublishProof = async (req, res) => {
 }
 util.sendResponse(res, response);
 };
-module.exports = proof;
+module.exports = fabcar;

@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  title: 'DXC DIP API(s)'
+  title: 'fabcar API(s)'
   version: '1.0.0'
   description: >-
     for testing the rest of the API(S). 
@@ -8,12 +8,12 @@ schemes:
 - https
 paths:
 
-  /api/user:
+  /api/createOrganization:
     post:
-      summary: Register and enroll user to blockchain network
+      summary: Register and enroll Organization to blockchain network
       tags:
-      - User Registeration
-      description: Register and enroll user to blockchain network
+      - Organization Registeration and verification
+      description: Register and enroll Organization to blockchain network
       requestBody:
         required: true
         content:
@@ -40,107 +40,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/definitions/ErrorResponse"
-
-  /api/access-token:
-    post:
-      summary: get access token 
+                $ref: "#/definitions/ErrorResponse"  
+             
+  /api/getOrganization/{userId}:
+    get:      
       tags:
-      - access token
-      description: get access token
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/definitions/accessTokenSource"
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-                schema:
-                  type: object
-                  properties:
-                    success:
-                      type: boolean
-                      example: true
-                    result:
-                      type: string
-                      example: "xxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                    
-        "500":
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/ErrorResponse"
-  /api/publishproof:
-    post:
-      summary: Publish the proof  to blockchain network
-      tags:
-      - Proof
-      description: Publish the proof  to blockchain network
-      parameters:
-      - name: auth
-        in: header
-        description: an authorization header
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/definitions/publishProofSource"
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-                schema:
-                  type: object
-                  properties:
-                    success:
-                      type: boolean
-                      example: true
-                    result:
-                      type: string
-                      example: "Authority Created successfully"
-                    
-        500:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/ErrorResponse"
-  /api/findproof/{agreementHash}/{userId}:
-    get:
-      tags:
-      - "Proof"
-      summary: "Find proof by AgreementHash"
-      description: "Returns a single Proof"
-      parameters:
-      - name: auth
-        in: header
-        description: an authorization header
-        required: true
-        schema:
-          type: string
-      - name: agreementHash
-        in: path
-        description: AgreementHash of proof to return
-        required: true
-        schema:
-          type: string
+      - "Organization Registeration and verification"
+      summary: "verify Organization"
+      description: "verify Organization"
+      parameters:           
       - name: userId
         in: path
-        description: AgreementHash of proof to return
+        description: verify Organization
         required: true
         schema:
           type: string
@@ -150,8 +61,76 @@ paths:
           content: 
            application/json:
               schema:
-              $ref: "#/definitions/publishProofSource"
+              $ref: "#/definitions/userEnrollSource"
 
+        500:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+                
+  /api/createCar/{userId}:
+    post:
+      summary: Create Car in blockchain network
+      tags:
+      - Fabcar Example
+      description: Create Car in blockchain network
+      parameters:           
+      - name: userId
+        in: path
+        description: Create car
+        required: true
+        schema:
+          type: string      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/createCarSource"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+                schema:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                      example: true
+                    result:
+                      type: string
+                      example: "Car Created successfully"
+                    
+        500:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+                
+  /api/queryAllCars/{userId}:
+    get:
+      tags:
+      - "Fabcar Example"
+      summary: "queryAllCars"
+      description: "Returns all cars"
+      parameters:           
+      - name: userId
+        in: path
+        description: Returns all cars
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content: 
+           application/json:
+              schema:
+              $ref: "#/definitions/createCarSource"
         500:
           description: Error
           content:
@@ -179,58 +158,37 @@ definitions:
     properties:
         org:
           type: string
-          example: "authority1msp"
+          example: "org1msp"
         userId:
           type: string
-          example: "User1"
+          example: "user1"
         pw:
           type: string
           example: "user1234"
         affiliation:
           type: string
-          example: "org1.department1"
+          example: ""
         role:
           type: string
-          example: "client"
-  accessTokenSource:
-    properties:
-        userId:
+          example: "client"  
+  createCarSource:
+    properties:        
+        carNumber:
           type: string
-          example: "userId"
-        password:
+          example: "CAR12"
+        color:
           type: string
-          example: "password"
-  publishProofSource:
-    properties:
-        proofID:
+          example: "brown"
+        make:
           type: string
-          example: "0fc45500-e45c-11e9-9510-b546336de70a"
-        userId:
+          example: "Holden"
+        model:
           type: string
-          example: "userId"
-        proof:
-          type: object
-          properties:
-            agreementHash: 
-              type: string
-              example: "f916abecd253adb63e6fd29fe9c874759f61134e1987acee4c6de6b300b36d52"
-            partySignatures:
-              type: array
-              items:
-                type: object
-                properties:
-                  party:
-                    type: object
-                    properties:
-                      partyID:
-                        type: string
-                        example: "140e382b-d747-4648-abf5-0e0c2c4f4f73"
-                      name: 
-                        type: string
-                        example: "AXA Equitable"
-                  partySignature:
-                    type: string
-                    example: "nKjg5RlSZsJDkBM+a9hz4SDzVWMX/OY9QJ46Q1whh/iOwqda6mDLoWRKTtzDK+U6zXIlf/oVeFAqzMguye/aaLMMiCLACT4D/M6wUk6ux6eyLVx2ny1RDHG4M6ktrx/jVwdGII6ze+bYAhOa6Go1lj/TwLua8RBrDtKxE4qboDJXMWPXeTKeQNdKAw/V5ATv0qMBY5E8VWgp+8UMf469CIzhsmjxZPEiOSbrptoENIWa35pAxIqLbx0ab59jpXojV2mEJ7tWEVIhBDPo4K9FHlBDNSIZ3XoFnXyo4t7SUrc+0tQrvv72/N8MT7ugTSzFpmZiFVX+IFuJ6IFkF7Vo6Q=="
+          example: "Barina"
+        owner:
+          type: string
+          example: "Shotaro"        
+            
 components:
  # securitySchemes:
  #   OAuth2:

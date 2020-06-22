@@ -34,6 +34,6 @@ logger.debug('setting up /user route');
 /**
  * Add routes
  */
-router.post('/', userController.createUser);
-router.get('/',userController.getUsers);
+router.post('/', userController.createOrganization);
+router.get('/:userId', userController.getOrganization);
 module.exports = router;
